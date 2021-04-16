@@ -16,6 +16,12 @@ class Player:
         self.spell_power = spell_power
         self.crit_rating = crit_rating
         self.haste_rating = haste_rating
+        
+class History:
+    def __init__(self,time,total_damage,gcd):
+        self.time = time
+        self.total_damage = total_damage
+        self.gcd = gcd  
 
 class Spell:
     def __init__(self,name
@@ -37,6 +43,12 @@ class Spell:
         self.max_charges = max_charges
         self.current_charges = current_charges
         
+    def cast_spell(self,history: History
+                   ,player: Player):
+        history.total_damage += self.spell_power_modifier * player.spell_power
+        history.time += self.cast_time
+        
+        
 class Buff:
     def __init__(self,present
                  ,base_duration
@@ -50,18 +62,7 @@ class Buff:
         self.max_charges = max_charges
         self.current_charges = current_charges
         self.effect = effect
-        
-    def apply_effect(self
-                     ,player: Player
-                     , ):
-        print('i')
-        
-class History:
-    def __init__(self,time,total_damage,gcd):
-        self.time = time
-        self.total_damage = total_damage
-        self.gcd = gcd
-        
+          
         
 # %% functions
 
