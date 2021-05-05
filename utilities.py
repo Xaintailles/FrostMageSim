@@ -7,6 +7,9 @@ Created on Wed Apr  7 10:12:38 2021
 
 import random
 
+def random_generation():
+    return random.randrange(0,10000)
+
 # %% Classes
 class Player:
     def __init__(self,spell_power
@@ -45,8 +48,12 @@ class Spell:
         
     def cast_spell(self,history: History
                    ,player: Player):
-        history.total_damage += self.spell_power_modifier * player.spell_power
+        spell_base_damage = self.spell_power_modifier * player.spell_power
+        history.total_damage += spell_base_damage + (spell_base_damage * self.crit_modifier * (random_generation() <= player.crit_rating))
         history.time += self.cast_time
+        
+        if self.charges > 0:
+            self.charges -= 1
         
         
 class Buff:

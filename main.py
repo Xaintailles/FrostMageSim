@@ -17,4 +17,11 @@ bu_lonelywinter =
 bu_fingersorfrost = 
 bu_chainreaction = 
 
-print(type(sp_frostbolt).__name__)
+p_xaint = u.Player(1950,3500,1200)
+
+h_history = u.History(0,0,1)
+
+sp_frostbolt.cast_spell(h_history,p_xaint)
+
+print(h_history.total_damage)
+print(h_history.time)
