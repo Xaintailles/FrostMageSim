@@ -34,7 +34,8 @@ class Spell:
                  ,crit_modifier
                  ,cooldown,school
                  ,max_charges
-                 ,current_charges):
+                 ,current_charges
+                 ,charge_reload_time):
         
         self.name = name
         self.crit_chance = crit_chance
@@ -45,6 +46,7 @@ class Spell:
         self.school = school
         self.max_charges = max_charges
         self.current_charges = current_charges
+        self.charge_reload_time = charge_reload_time
         
     def cast_spell(self,history: History
                    ,player: Player):
