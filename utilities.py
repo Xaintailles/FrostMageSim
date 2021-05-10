@@ -51,11 +51,12 @@ class Spell:
     def cast_spell(self,history: History
                    ,player: Player):
         spell_base_damage = self.spell_power_modifier * player.spell_power
-        history.total_damage += spell_base_damage + (spell_base_damage * self.crit_modifier * (random_generation() <= player.crit_rating))
+        crit_bol = random_generation() <= player.crit_rating
+        history.total_damage += spell_base_damage + (spell_base_damage * self.crit_modifier * crit_bol)
         history.time += self.cast_time
         
-        if self.charges > 0:
-            self.charges -= 1
+        if self.current_charges > 0:
+            self.current_charges -= 1
         
         
 class Buff:
