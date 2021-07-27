@@ -7,8 +7,10 @@ Created on Wed Apr  7 10:12:38 2021
 
 import random
 
-def random_generation():
+def random_generation() -> int:
     return random.randrange(0,10000)
+
+
 
 # %% Classes
 class Player:
@@ -62,16 +64,36 @@ class Spell:
 class Buff:
     def __init__(self,present
                  ,base_duration
-                 ,present_duration
+                 ,current_duration
                  ,max_charges
                  ,current_charges
+                 ,proc_chance
                  ,effect: dict):
         self.present = present
         self.base_duration = base_duration
-        self.present_duration = present_duration
+        self.current_duration = current_duration
         self.max_charges = max_charges
         self.current_charges = current_charges
+        self.proc_chance = proc_chance
         self.effect = effect
+            
+    def refresh_buff(self):
+        self.present = 1
+        self.current_duration = self.base_duration
+    
+    def update_duration(self, elapsed_time: int):
+        self.current_duration += elapsed_time
+        
+    def update_stacks(self):
+        self.refresh_buff()
+        if self.current_charges < self.max_charges:
+            self.current_charges += 1
+            
+    def global_update(self):
+        
+
+            
+        
           
         
 # %% functions
@@ -83,7 +105,7 @@ def cast_spell(player: Player
                , hot_streak: Buff):
 
     damage = spell.spell_power_modifier * player.spell_power
-    roll = random.randrange(0,10000)
+    roll = random_generation()
     
     if spell.charges > 0:
         spell.charges -= 1

@@ -88,7 +88,9 @@ while h_history.time <= 600:
         sp_frostbolt.cast_spell(h_history,p_xaint)
         
         #We check if we generated FoF proc
-        if random.randrange(0,10000) <= 1500 and bu_fingersoffrost.current_charges < bu_fingersoffrost.max_charges:
+        if bu_fingersoffrost.current_charges >= bu_fingersoffrost.max_charges:
+            continue
+        elif random.randrange(0,10000) <= 1500:
             bu_fingersoffrost.current_charges += 1
             
         #we check if we generated a brainfreeze proc
@@ -98,8 +100,21 @@ while h_history.time <= 600:
         continue
     
 print('dps is %s' % (str(h_history.total_damage / h_history.time)))
-   
-    
+
+
+
+
+bu_icyveins = u.Buff(present = 0
+                 ,base_duration = 30
+                 ,current_duration = 0
+                 ,max_charges = 1
+                 ,current_charges = 0
+                 ,effect = [])
+
+print(bu_icyveins.present)
+bu_icyveins.refresh_buff()
+
+print(bu_icyveins.current_duration)
     
 
         
